@@ -3,12 +3,46 @@
     <head>
         <meta charset="utf-8">
         <title>Financas</title>
+        <link rel="stylesheet" href="jquery-mobile/financeiro.css">
         <link rel="stylesheet" href="jquery-mobile/jquery.mobile-1.4.5.css">
         <script src="jquery-mobile/jquery-2.1.1.min.js"></script>
         <script src="jquery-mobile/jquery.mobile-1.4.5.min.js"></script>
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-        <!-- Grafico do Relatorio -->
+         <!-- Script Grafico -->
         <script type="text/javascript">
+          google.charts.load('current', {'packages':['corechart']});
+          google.charts.setOnLoadCallback(drawChart);
+          function drawChart() {
+
+            var data = google.visualization.arrayToDataTable([
+              ['Task', 'Hours per Day'],
+              ['Trabalho',     11],
+              ['Alimentação',      5],
+              ['Lazer',  4],
+              ['Roupas', 3],
+              ['Família',    5],
+              ['Viagens',    7],
+              ['Presentes',    8]
+            ]);
+
+            var options = {
+              title: 'Demonstrativo do Mês',
+                is3D : true,
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+            
+            var chart2 = new google.visualization.PieChart(document.getElementById('piecharter'));
+              
+              
+            chart.draw(data, options);
+            chart2.draw(data, options);
+              
+            
+          }
+        </script>
+        <!-- Grafico do Relatorio -->
+        <!--<script type="text/javascript">
               google.charts.load('current', {'packages':['bar']});
               google.charts.setOnLoadCallback(drawChart);
               function drawChart() {
@@ -32,41 +66,180 @@
 
                 chart.draw(data, options);
               }
-        </script>  
+        </script>-->
     </head>
-    <body>
-    <div data-role="page" class="jqm-demos ui-responsive-panel" id="panel-responsive-page1" data-title="Panel responsive page" data-url="panel-responsive-page1">
+    <body>  
+                        
+    <!-- Login -->
+        <div data-role="page" id="telaInicial" data-theme="b" data-position="fixed">
+                <header data-role="header" data-position="fixed">
+                    <h1>Novidades</h1>
+                         <!--<a href="#nav-panel" data-icon="bars" data-iconpos="notext">Menu</a> -->
+                    <a href="#cadastraUsuario" data-icon="user" class="ui-btn-left" data-iconpos="notext"><abbr title="Cadastrar novo usuário">Cadastrar</abbr></a>
+                         <a href="#validaLogin" data-icon="gear" class="ui-btn-right" data-iconpos="notext">Já tem Cadastro?</a>
+                </header>
+
+               <div role="main" class="ui-content jqm-content jqm-fullwidth">
+                <div class="ui-body ui-body-a ui-corner-all">
+                    <h3>Missão do aplicativo</h3>
+                    <div class="ui-body ui-body-b ui-corner-all">
+                        <p>Atuar nas movimentações do usuário objetivando o seu controle financeiro e identificar maiores gastos e demonstrativos mensais do consumo realizado.</p>
+                    </div>
+                </div>
+
+                <br>
+
+                <div class="ui-body ui-body-a ui-corner-all">
+                    <h3>Gerencie as suas metas</h3>
+                    <div class="ui-body ui-body-b ui-corner-all">
+                        <ul>
+                            <li><p><strong>Valor Esperado:</strong> R$6.000,00</p></li>
+                            <li><p><strong>Valor Atual:</strong> R$4.000,00</p></li>
+                            <li><p><strong>Faltou:</strong> R$2.000,00</p></li>
+                        </ul>
+                    </div>
+                </div>
+                <br>
+               <div class="ui-body ui-body-a ui-corner-all">
+                    <h3>Resultados em gráfico</h3>
+                    <div class="ui-body ui-body-b ui-corner-all">
+                        <div style="overflow: auto" class="ui-body ui-body-a ui-corner-all">
+                            <div id="piechart" style="width: 450px; height: 250px;"></div>
+                        </div>
+                    </div>
+                
+                    <!--<a href="../" data-rel="back" data-ajax="false" class="ui-btn ui-shadow ui-corner-all ui-mini ui-btn-inline ui-icon-carat-l ui-btn-icon-left ui-alt-icon ui-nodisc-icon">Back</a>-->
+                </div>
+                <div data-role="panel" data-position="right" data-position-fixed="true" data-display="overlay" data-theme="b" id="validaLogin">
+                    <form class="userLogin">
+                        <h2>Login</h2>
+                        <label for="name">Username:</label>
+                        <input type="text" name="name" id="name" value="" data-clear-btn="true" data-mini="true" data-theme="a">
+                        <label for="password">Password:</label>
+                        <input type="password" name="password" id="password" value="" data-clear-btn="true" autocomplete="off" data-mini="true" data-theme="a">
+                        <div class="ui-grid-b">
+
+                          <div class="ui-block-a">   <a href="#" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-b ui-mini">Cancel</a> </div>
+                          <div class="ui-block-b">   <a href="#painelPrincipal" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-mini">Save</a>   </div> 
+                        </div>
+                    </form>
+                </div><!-- /panel -->
+
+
+                <div data-role="footer" data-position="fixed" data-theme="b">
+                    <small align="center" class="ui-bar"><font color="009ACD">Atuando no controle das suas movimentações</font></small>
+                </div>
+              </div>
+        </div>
+            
+        <!-- Cadastro de Usuario -->
+        <div data-role="page" id="cadastraUsuario" data-theme="b" data-position="fixed">
+            <header data-role="header" data-position="fixed">
+                <h1>Novo Usuário</h1>
+                	 <!--<a href="#nav-panel" data-icon="bars" data-iconpos="notext">Menu</a> -->
+                     <a href="#addUsuario" data-icon="gear" class="ui-btn-right" data-iconpos="notext">Já tem Cadastro?</a>
+            </header>
+               
+             <div data-role="main">   
+                <div class="ui-body ui-corner-all">
+                    <div data-role="navbar" data-role="panel" data-position-fixed="true" data-display="overlay" class="ui-grid-b" >  
+                        <form class="userform">
+                            <h3>Vamos criar um novo usuário </h3>
+                            <div class="ui-field-contain">
+                            <label for="name">Nome Completo:</label> <input type="text" name="nome" value="" data-clear-btn="true" data-mini="true" >
+                            </div>
+                            <div class="ui-field-contain">
+                            <label>Endereço:</label>     <input type="text" name="endereco"  value="" data-clear-btn="true" data-mini="true" >
+                            </div>
+                            <div class="ui-field-contain">
+                            <label>Nº:</label> <input type="text" name="numero"  value="" data-clear-btn="true" data-mini="true" >
+                            </div>
+                            <div class="ui-field-contain">
+                            <label>CEP:</label> <input type="text" name="cep"  value="" data-clear-btn="true" data-mini="true" > 
+                            </div>
+                            <div class="ui-field-contain">
+                            <label>Bairro:</label>   <input type="text" name="bairro"  value="" data-clear-btn="true" data-mini="true">
+                            </div>
+                            <div class="ui-field-contain">
+                            <label>Telefone: </label> <input type="text" name="telefone"  value="" data-clear-btn="true" data-mini="true">
+                            </div>
+
+                            <label for="email-2">Email:</label>
+                            <input type="email" data-mini="true" data-clear-btn="true" name="email-2" id="email-2" value="">
+                            <label for="password">Senha:</label>
+                            <input type="password" name="password" data-clear-btn="true" data-mini="true" id="password" value="" autocomplete="off">
+                            <div class="ui-field-contain">
+                                <label for="date">Data de Nascimento:</label>
+                                <input type="date" name="dataNascimento" data-clear-btn="true" data-mini="true" id="date" value="">
+                            </div>
+                            <br>
+                            <br>
+                            <br>
+                            <div>
+                                <input type="submit" data-icon="check" data-iconpos="right" id="submit-1" class="ui-shadow ui-btn ui-corner-all" value="Registrar">
+                            </div>
+                        </form>
+                      </div>
+                </div>
+            </div>
+            <div data-role="panel" data-position="right" data-position-fixed="true" data-display="overlay" data-theme="b" id="addUsuario">
+                <form class="userform">
+                    <h2>Login</h2>
+                    <label for="name">Username:</label>
+                    <input type="text" name="name" id="name" value="" data-clear-btn="true" data-mini="true" data-theme="a">
+                    <label for="password">Password:</label>
+                    <input type="password" name="password" id="password" value="" data-clear-btn="true" autocomplete="off" data-mini="true" data-theme="a">
+                    <div class="ui-grid-b">
+
+                      <div class="ui-block-a">   <a href="#" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-b ui-mini">Cancel</a> </div>
+                      <div class="ui-block-b">   <a href="#painelPrincipal" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-mini">Save</a>   </div> 
+                    </div>
+                </form>
+            </div><!-- /panel -->
+
+            
+            <div data-role="footer" data-position="fixed" data-theme="b">
+            <small align="center" class="ui-bar"><font color="009ACD">Atuando no controle das suas movimentações</font></small>
+        </div>
+        </div>
+        
+        
+    <!-- Menu Principal -->    
+    <div data-role="page" class="jqm-demos ui-responsive-panel" id="painelPrincipal" data-title="Panel responsive page">
         <div data-role="header" data-position="fixed" data-theme="b">
-            <h1>PRINCIPAL</h1>
+            <h1>Principal</h1>
             <a href="#nav-panel" data-icon="bars" data-iconpos="notext">Menu</a>
-            <a href="#add-form" data-icon="gear" data-iconpos="notext">Add</a>
+            <a href="#panel-logout" data-icon="gear" data-iconpos="notext">Add</a>
         </div><!-- /header -->
 
         <div role="main" class="ui-content jqm-content jqm-fullwidth">
             <div class="ui-body ui-body-a ui-corner-all">
                 <h3>Visão geral - Setembro</h3>
-                <ul>
-                    <li><p>Conta X: R$ 4.000,00</p></li>
-                    <li><p>Receita X: R$ 5.100,00</p></li>
-                    <li><p>Despesa X: R$ 1.100,00</p></li>
-                    <li><p>Cartão de Crédito: R$ 1.100,00</p></li>
-                </ul>
+                <div class="ui-body ui-body-b ui-corner-all">
+                    <ul>
+                        <li><p>Conta X: R$ 4.000,00</p></li>
+                        <li><p>Receita X: R$ 5.100,00</p></li>
+                        <li><p>Despesa X: R$ 1.100,00</p></li>
+                        <li><p>Cartão de Crédito: R$ 1.100,00</p></li>
+                    </ul>
+                </div>
             </div>
 
             <br>
 
             <div class="ui-body ui-body-a ui-corner-all">
                 <h3>Meta Mensal</h3>
-                <ul>
-                    <li><p>Valor Esperado: R$6.000,00</p></li>
-                    <li><p>Valor Atual: R$4.000,00</p></li>
-                    <li><p>Faltou: R$2.000,00</p></li>
-                </ul>
-            </div>
-                <br>
-            <div style="overflow: auto" class="ui-body ui-body-a ui-corner-all">
-                <div id="piechart" style="width: 450px; height: 300px;">
+                <div class="ui-body ui-body-b ui-corner-all">
+                    <ul>
+                        <li><p>Valor Esperado: R$6.000,00</p></li>
+                        <li><p>Valor Atual: R$4.000,00</p></li>
+                        <li><p>Faltou: R$2.000,00</p></li>
+                    </ul>
                 </div>
+            </div>
+            <br>
+            <div style="overflow: auto" class="ui-body ui-body-b ui-corner-all">
+                <div id="piecharter" style="width: 450px; height: 250px;"></div>
             </div>
             <div data-demo-html="#panel-responsive-page1"></div><!--/demo-html -->
             <br>
@@ -81,14 +254,14 @@
             <ul data-role="listview">
                 <li><a data-role="button" data-icon="delete" data-iconpos="left" href="#" data-rel="close">Fechar menu</a></li>
                 <li><a class="ui-icon-user ui-btn ui-btn-icon-left" href="#panel-responsive-page2">Perfil</a></li>
-                <li><a class="ui-icon-shop ui-btn ui-btn-icon-left" data-transition="flow" href="#cadatraMov">Movimentações</a></li>
-                <li><a data-role="button" data-icon="lock" data-iconpos="left" href="#panel-responsive-page2">Contas</a></li>
-                <li><a data-role="button" data-icon="star" data-transition="flow" data-iconpos="left" href="#relatorioMetas">Relátorios</a></li>
-                <li><a data-role="button" data-icon="calendar" data-iconpos="left" href="#panel-responsive-page2">Metas</a></li>
+                <li><a class="ui-icon-bullets ui-btn ui-btn-icon-left" data-transition="flow" href="#cadatraMov">Movimentações</a></li>
+                <li><a data-role="button" data-transition="flow" data-icon="lock" data-iconpos="left" href="#menuContas">Contas</a></li>
+                <li><a data-role="button" data-icon="star" data-transition="flow" data-iconpos="left" href="#relatorioMetas">Estatísticas</a></li>
+                <li><a data-role="button" data-icon="calendar" data-iconpos="left" href="#metasUsuario">Metas</a></li>
             </ul>
         </div><!-- /panel -->
         
-        <div data-role="panel" data-position="right" data-display="reveal" data-theme="a" id="add-form">
+        <!--<div data-role="panel" data-position="right" data-display="reveal" data-theme="a" id="add-form">
             <form class="userform">
                 <h2>Login</h2>
                 <label for="name">Username:</label>
@@ -101,34 +274,292 @@
                 </div>
             </form>
         </div><!-- /panel -->
+        <div data-role="panel" data-position="right" data-display="overlay" data-theme="b" id="panel-logout">
+            <ul data-role="listview">
+                <li><a data-role="button" data-icon="delete" data-iconpos="left" href="#" data-rel="close">Fechar menu</a></li>
+                <li><a data-role="button" data-icon="tag" data-iconpos="left" href="#">Relatar Problemas</a></li>
+                <li><a data-role="button" data-icon="power" data-iconpos="left" href="#telaInicial">Sair</a></li>
+            </ul>
+        </div><!-- /panel -->
         <div data-role="footer" data-position="fixed" data-theme="b">
-            <small align="center" class="ui-bar">Cuidamos do controle de suas movimentações.</small>
+            <small align="center" class="ui-bar"><font color="009ACD">Atuando no controle das suas movimentações</font></small>
         </div>
      </div>
         
-        <!-- Cadastro de Movimentações-->
-    <div data-role="page" id="cadatraMov" data-theme="b">
-        <div data-role="header">
-            <h1>Movimentos</h1>
-            <a href="#panel-responsive-page1" data-icon="back" data-transition>Principal</a>
-            <a href="#add-form" data-icon="gear" data-iconpos="notext">Add</a>
-            <div data-role="navbar" data-iconpos="left">
-                <ul>
-                    <li><a href="a.html" data-icon="plus" class="ui-btn-active"><font color= "00ff00">Receita</font></a></li>
-                    <li><a href="b.html" data-icon="minus"><font color= "ff0000">Despesa</font></a></li>
-                    <li><a href="b.html" data-icon="heart"><font color= "993366">Tranferência</font></a></li>
-                </ul>
-            </div><!-- /navbar -->
+        <!-- Menu de Contas -->
+     <div data-role="page" id="menuContas">
+        <div data-role="header" data-theme="b">
+            <h1>Contas</h1>
+            <a href="#painelPrincipal" data-icon="home" data-transition="pop">Início</a>
+        </div>
+        
+        <div data-role="main">
+            <div class="ui-body ui-body-a ui-corner-all">
+                <a  data-role="button" href="#cadatraConta" data-transition="flip" data-theme="b" data-icon="plus" data-iconshadow="true"><font size='3' face="Verdana">Nova Conta</font></a>
+            </div>
+            <div class="ui-body ui-body-a ui-corner-all">
+                <table data-role="table" id="tabelaContas" data-mode="columntoggle" class="ui-body-d ui-shadow table-stripe ui-responsive" data-column-btn-theme="b" data-column-btn-text="Esconder.." data-column-popup-theme="a">
+                <thead>
+                   <tr class="ui-bar-d">
+                       <th data-priority="1"><font face="Verdana">Conta</font></th>
+                       <th data-priority="2"><abbr title="Total"><font face="Verdana">Total</font></abbr></th>
+                   </tr>
+                </thead>
+                 <tbody>
+                   <tr>
+                     <td>Conta X</td>
+                     <td>8.000,00</td>
+                   </tr>
+                   <tr>
+                     <td>Conta Teste</td>
+                     <td>5.400,00</td>
+                   </tr>
+                 </tbody>
+           </table>
+           </div>
         </div>
         <div data-role="footer" data-position="fixed" data-theme="b">
-            <small align="center" class="ui-bar">Cuidamos do controle de suas movimentações.</small>
+            <small align="center" class="ui-bar"><font color="009ACD">Atuando no controle das suas movimentações</font></small>
         </div>
     </div>
-        <!-- Relatorio de Metas-->
+         <!-- Cadastro de Contas -->
+        <div data-role="page" id="cadatraConta" data-theme="b">
+        <div data-role="header">
+            <h1><font face="Verdana">Nova Conta</font></h1>
+            <a href="#menuContas" data-icon="back" data-transition="pop">Voltar</a>
+        </div>
+        
+        <div data-role="main">
+            <div class="ui-body ui-corner-all">
+                <form>
+                   <div class="ui-field-contain">
+                        <label for="textinput-1">Título:</label>
+                        <input type="text" name="textinput-1" id="textinput-1" placeholder="Título..." value="">
+                    </div>
+                    <div class="ui-field-contain">
+                        <label for="number-pattern">Valor R$:</label>
+                        <input type="number" name="number" pattern="[0-9]*" id="number-pattern" value="">
+                    </div>
+                    <div class="ui-field-contain">
+                        <label for="select-choice-d" class="select">Tipo de Conta:</label>
+                        <select name="select-choice-d" id="select-choice-d" data-native-menu="false">
+                            <option value="corrrente">Conta Corrente</option>
+                            <option value="poupança">Conta Poupança</option>
+                            <option value="dinheiro">Dinheiro</option>
+                            <option value="investimento">Investimentos</option>
+                            <option value="outros">Outros</option>
+                        </select>
+                    </div>
+                    <div class="ui-field-contain">
+                        <label for="date">Data de Criação:</label>
+                        <input type="date" name="date" id="date" value="">
+                    </div>
+                    <br>
+                    <br>
+                    <br>
+                    <div>
+                        <input type="submit" data-icon="check" data-iconpos="right" id="submit-1" class="ui-shadow ui-btn ui-corner-all" value="Registrar">
+                    </div>
+                </form>
+             </div>
+        </div>
+        <div data-role="footer" data-position="fixed" data-theme="b">
+            <small align="center" class="ui-bar"><font color="009ACD">Atuando no controle das suas movimentações</font></small>
+        </div>
+    </div>
+        
+        
+        
+        
+        <!-- Menu de Movimentações-->
+    <div data-role="page" id="cadatraMov">
+        <div data-role="header" data-theme="b">
+            <h1>Movimentos</h1>
+            <a href="#painelPrincipal" data-icon="home" data-transition>Início</a>
+        </div>
+        
+        <div data-role="main">
+            <div class="ui-body ui-body-a ui-corner-all">
+                <a  data-role="button" href="#cadatraReceita" data-transition="flip" data-theme="b" data-icon="plus" data-iconshadow="true"><font size='3' face="Verdana" color= "00ff00">Receita</font></a>
+            </div>
+            <div class="ui-body ui-body-a ui-corner-all">
+                <a  data-role="button" href="#cadatraDespesa" data-transition="flip" data-theme="b" data-icon="minus" data-iconshadow="true"><font size='3' face="Verdana" color= "FF3030">Despesa</font></a>
+            </div>
+            <div class="ui-body ui-body-a ui-corner-all">
+                <a data-role="button" href="#cadatraTransferencia" data-transition="flip" data-theme="b" data-icon="heart" data-iconshadow="true"><font size='3' face="Verdana" color= "DA70D6">Tranferência</font></a>
+            </div>
+            <div class="ui-body ui-body-a ui-corner-all" align="center">
+                <img width="100%" src="jquery-mobile/images/mycommerce-icon.png"/>
+            </div>
+        </div>
+        <div data-role="footer" data-position="fixed" data-theme="b">
+            <small align="center" class="ui-bar"><font color="009ACD">Atuando no controle das suas movimentações</font></small>
+        </div>
+    </div>
+        <!-- Cadastro de Receitas-->
+    <div data-role="page" id="cadatraReceita" data-theme="b">
+        <div data-role="header">
+            <h1><font color="00ff00">Nova Receita</font></h1>
+            <a href="#cadatraMov" data-icon="back" data-transition="pop">Voltar</a>
+        </div>
+        
+        <div data-role="main">
+            <div class="ui-body ui-corner-all">
+                <form>
+                   <div class="ui-field-contain">
+                        <label for="textarea">Descrição da Movimentação:</label>
+                        <textarea cols="40" rows="8" name="textarea" id="textarea"></textarea>
+                    </div>
+                    <div class="ui-field-contain">
+                        <label for="number-pattern">Valor R$:</label>
+                        <input type="number" name="number" pattern="[0-9]*" id="number-pattern" value="">
+                    </div>
+                    <div class="ui-field-contain">
+                        <label for="select-choice-a" class="select">Conta da Movimentação:</label>
+                        <select name="select-choice-a" id="select-choice-a" data-native-menu="false">
+                            <option value="x">Conta X</option>
+                            <option value="teste">Conta de Teste</option>
+                        </select>
+                    </div>
+                    <div class="ui-field-contain">
+                        <label for="select-choice-b" class="select">Tipo de Movimentação:</label>
+                        <select name="select-choice-b" id="select-choice-b" data-native-menu="false">
+                            <option value="alimentacao">Alimentação</option>
+                            <option value="familia">Família</option>
+                            <option value="lazer">Lazer</option>
+                            <option value="presentes">Presentes</option>
+                            <option value="roupas">Roupas</option>
+                            <option value="trabalho">Trabalho</option>
+                            <option value="viagens">Viagens</option>
+                        </select>
+                    </div>
+                    <div class="ui-field-contain">
+                        <label for="date">Data:</label>
+                        <input type="date" name="date" id="date" value="">
+                    </div>
+                    <br>
+                    <br>
+                    <br>
+                    <div>
+                        <input type="submit" data-icon="check" data-iconpos="right" id="submit-1" class="ui-shadow ui-btn ui-corner-all" value="Registrar">
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div data-role="footer" data-position="fixed" data-theme="b">
+            <small align="center" class="ui-bar"><font color="009ACD">Atuando no controle das suas movimentações</font></small>
+        </div>
+    </div>
+        
+        <!-- Cadastro de Despesa-->
+    <div data-role="page" id="cadatraDespesa" data-theme="b">
+        <div data-role="header">
+            <h1><font color="FF3030">Nova Despesa</font></h1>
+            <a href="#cadatraMov" data-icon="back" data-transition="pop">Voltar</a>
+        </div>
+        
+        <div data-role="main">
+            <div class="ui-body ui-corner-all">
+                <form>
+                   <div class="ui-field-contain">
+                        <label for="textarea">Descrição da Movimentação:</label>
+                        <textarea cols="40" rows="8" name="textarea" id="textarea"></textarea>
+                    </div>
+                    <div class="ui-field-contain">
+                        <label for="number-pattern">Valor R$:</label>
+                        <input type="number" name="number" pattern="[0-9]*" id="number-pattern" value="">
+                    </div>
+                    <div class="ui-field-contain">
+                        <label for="select-choice-c" class="select">Conta da Movimentação:</label>
+                        <select name="select-choice-c" id="select-choice-c" data-native-menu="false">
+                            <option value="x">Conta X</option>
+                            <option value="teste">Conta de Teste</option>
+                        </select>
+                    </div>
+                    <div class="ui-field-contain">
+                        <label for="select-choice-d" class="select">Tipo de Movimentação:</label>
+                        <select name="select-choice-d" id="select-choice-d" data-native-menu="false">
+                            <option value="alimentacao">Alimentação</option>
+                            <option value="familia">Família</option>
+                            <option value="lazer">Lazer</option>
+                            <option value="presentes">Presentes</option>
+                            <option value="roupas">Roupas</option>
+                            <option value="trabalho">Trabalho</option>
+                            <option value="viagens">Viagens</option> 
+                        </select>
+                    </div>
+                    <div class="ui-field-contain">
+                        <label for="date">Data:</label>
+                        <input type="date" name="date" id="date" value="">
+                    </div>
+                    <br>
+                    <br>
+                    <br>
+                    <div>
+                        <input type="submit" data-icon="check" data-iconpos="right" id="submit-1" class="ui-shadow ui-btn ui-corner-all" value="Registrar">
+                    </div>
+                </form>
+             </div>
+        </div>
+        <div data-role="footer" data-position="fixed" data-theme="b">
+            <small align="center" class="ui-bar"><font color="009ACD">Atuando no controle das suas movimentações</font></small>
+        </div>
+    </div>
+          <!-- Cadastro de Transferencia-->
+    <div data-role="page" id="cadatraTransferencia" data-theme="b">
+        <div data-role="header">
+            <h1><font color="DA70D6">Nova Transferência</font></h1>
+            <a href="#cadatraMov" data-icon="back" data-transition="pop">Voltar</a>
+        </div>
+        
+        <div data-role="main">
+            <div class="ui-body ui-corner-all">
+                <form>
+                   <div class="ui-field-contain">
+                        <label for="textarea">Descrição da Movimentação:</label>
+                        <textarea cols="40" rows="8" name="textarea" id="textarea"></textarea>
+                    </div>
+                    <div class="ui-field-contain">
+                        <label for="number-pattern">Valor R$:</label>
+                        <input type="number" name="number" pattern="[0-9]*" id="number-pattern" value="">
+                    </div>
+                    <div class="ui-field-contain">
+                        <label for="select-choice-e" class="select">Tranferir de:</label>
+                        <select name="select-choice-e" id="select-choice-e" data-native-menu="false">
+                            <option value="x">Conta X</option>
+                            <option value="teste">Conta de Teste</option>
+                        </select>
+                    </div>
+                    <div class="ui-field-contain">
+                        <label for="select-choice-f" class="select">Para:</label>
+                        <select name="select-choice-f" id="select-choice-f" data-native-menu="false">
+                            <option value="x">Conta X</option>
+                            <option value="teste">Conta de Teste</option>
+                        </select>
+                    </div>
+                    <div class="ui-field-contain">
+                        <label for="date">Data:</label>
+                        <input type="date" name="date" id="date" value="">
+                    </div>
+                    <br>
+                    <br>
+                    <br>
+                    <div>
+                        <input type="submit" data-icon="check" data-iconpos="right" id="submit-1" class="ui-shadow ui-btn ui-corner-all" value="Registrar">
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div data-role="footer" data-position="fixed" data-theme="b">
+            <small align="center" class="ui-bar"><font color="009ACD">Atuando no controle das suas movimentações</font></small>
+        </div>
+    </div>
+        
+        <!-- Estatisticas-->
     <div data-role="page" id="relatorioMetas">
         <div data-role="header" data-theme="b">
             <h1>Metas</h1>
-            <a href="#panel-responsive-page1" data-icon="back" data-transition>Principal</a>
+            <a href="#painelPrincipal" data-icon="back" data-transition="pop">Principal</a>
             <a href="#add-form" data-icon="gear" data-iconpos="notext">Add</a>
         </div>
         <div role="main" class="ui-content jqm-content jqm-fullwidth">
@@ -137,39 +568,71 @@
             </div>
         </div>
         <div data-role="footer" data-position="fixed" data-theme="b">
-            <small align="center" class="ui-bar">Cuidamos do controle de suas movimentações.</small>
+            <small align="center" class="ui-bar"><font color="009ACD">Atuando no controle das suas movimentações</font></small>
         </div>
     </div>
-    </body>
-    
-    
-    
-    
-    <!-- Script Grafico -->
-    <script type="text/javascript">
-          google.charts.load('current', {'packages':['corechart']});
-          google.charts.setOnLoadCallback(drawChart);
-          function drawChart() {
-
-            var data = google.visualization.arrayToDataTable([
-              ['Task', 'Hours per Day'],
-              ['Trabalho',     11],
-              ['Alimentação',      5],
-              ['Lazer',  4],
-              ['Roupas', 3],
-              ['Família',    5],
-              ['Viagens',    7],
-              ['Presentes',    8]
-            ]);
-
-            var options = {
-              title: 'Demonstrativo do Mês',
-                is3D : true,
-            };
-
-            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-
-            chart.draw(data, options);
-          }
-    </script>
+        
+        <!-- Metas -->
+    <div data-role="page" id="metasUsuario">
+        <div data-role="header" data-theme="b">
+            <h1>Metas</h1>
+            <a href="#painelPrincipal" data-icon="home" data-transition="pop">Início</a>
+        </div>
+        
+        <div data-role="main">
+            <div class="ui-body ui-body-a ui-corner-all">
+                <a  data-role="button" href="#cadatraMeta" data-transition="flip" data-theme="b" data-icon="plus" data-iconshadow="true"><font size='3' face="Verdana">Nova Meta</font></a>
+            </div>  
+        </div>
+        <div data-role="footer" data-position="fixed" data-theme="b">
+            <small align="center" class="ui-bar"><font color="009ACD">Atuando no controle das suas movimentações</font></small>
+        </div>
+    </div>
+        <!-- Cadastro de Metas -->
+    <div data-role="page" id="cadatraMeta" data-theme="b">
+        <div data-role="header" data-theme="b">
+            <h1>Metas</h1>
+            <a href="#painelPrincipal" data-icon="home" data-transition="pop">Início</a>
+        </div>
+        
+        <div data-role="main">
+            <div class="ui-body ui-corner-all">
+                <form>
+                   <div class="ui-field-contain">
+                        <label for="text-basic">Título da Meta:</label>
+                        <input type="text" name="text-basic" id="text-basic" value="">
+                    </div>
+                    <div class="ui-field-contain">
+                        <label for="number-pattern">Valor Pretendido R$:</label>
+                        <input type="number" name="number" pattern="[0-9]*" id="number-pattern" value="">
+                    </div>
+                    <div class="ui-field-contain">
+                        <label for="select-choice-e" class="select">Conta da Meta:</label>
+                        <select name="select-choice-e" id="select-choice-e" data-native-menu="false">
+                            <option value="x">Conta X</option>
+                            <option value="teste">Conta de Teste</option>
+                        </select>
+                    </div>
+                    <div class="ui-field-contain">
+                        <label for="date">Data Inicial da Meta:</label>
+                        <input type="date" name="date" id="date" value="">
+                    </div>
+                    <div class="ui-field-contain">
+                        <label for="date">Data Final da Meta:</label>
+                        <input type="date" name="date" id="date" value="">
+                    </div>
+                    <br>
+                    <br>
+                    <br>
+                    <div>
+                        <input type="submit" data-icon="check" data-iconpos="right" id="submit-1" class="ui-shadow ui-btn ui-corner-all" value="Registrar">
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div data-role="footer" data-position="fixed" data-theme="b">
+            <small align="center" class="ui-bar"><font color="009ACD">Atuando no controle das suas movimentações</font></small>
+        </div>
+    </div>   
+    </body> 
 </html>
