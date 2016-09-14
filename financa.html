@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Financas</title>
+        <link rel="stylesheet" href="jquery-mobile/jquery.mobile-1.4.5.css">
+        <script src="jquery-mobile/jquery-2.1.1.min.js"></script>
+        <script src="jquery-mobile/jquery.mobile-1.4.5.min.js"></script>
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <!-- Grafico do Relatorio -->
+        <script type="text/javascript">
+              google.charts.load('current', {'packages':['bar']});
+              google.charts.setOnLoadCallback(drawChart);
+              function drawChart() {
+                var data = google.visualization.arrayToDataTable([
+                  ['Ano', 'Receitas', 'Despesas', 'Tranferência'],
+                  ['2014', 1000, 400, 200],
+                  ['2015', 1170, 460, 250],
+                  ['2016', 660, 1120, 300],
+                  ['2017', 1030, 540, 350]
+                ]);
+
+                var options = {
+                  chart: {
+                    title: 'Metas Atingidas',
+                    subtitle: 'Receitas, Despesas e Tranferência: 2014-2017',
+                  },
+                  bars: 'horizontal' // Required for Material Bar Charts.
+                };
+
+                var chart = new google.charts.Bar(document.getElementById('barchart_material'));
+
+                chart.draw(data, options);
+              }
+        </script>  
+    </head>
+    <body>
+    <div data-role="page" class="jqm-demos ui-responsive-panel" id="panel-responsive-page1" data-title="Panel responsive page" data-url="panel-responsive-page1">
+        <div data-role="header" data-position="fixed" data-theme="b">
+            <h1>PRINCIPAL</h1>
+            <a href="#nav-panel" data-icon="bars" data-iconpos="notext">Menu</a>
+            <a href="#add-form" data-icon="gear" data-iconpos="notext">Add</a>
+        </div><!-- /header -->
+
+        <div role="main" class="ui-content jqm-content jqm-fullwidth">
+            <div class="ui-body ui-body-a ui-corner-all">
+                <h3>Visão geral - Setembro</h3>
+                <ul>
+                    <li><p>Conta X: R$ 4.000,00</p></li>
+                    <li><p>Receita X: R$ 5.100,00</p></li>
+                    <li><p>Despesa X: R$ 1.100,00</p></li>
+                    <li><p>Cartão de Crédito: R$ 1.100,00</p></li>
+                </ul>
+            </div>
+
+            <br>
+
+            <div class="ui-body ui-body-a ui-corner-all">
+                <h3>Meta Mensal</h3>
+                <ul>
+                    <li><p>Valor Esperado: R$6.000,00</p></li>
+                    <li><p>Valor Atual: R$4.000,00</p></li>
+                    <li><p>Faltou: R$2.000,00</p></li>
+                </ul>
+            </div>
+                <br>
+            <div style="overflow: auto" class="ui-body ui-body-a ui-corner-all">
+                <div id="piechart" style="width: 450px; height: 300px;">
+                </div>
+            </div>
+            <div data-demo-html="#panel-responsive-page1"></div><!--/demo-html -->
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <!--<a href="../" data-rel="back" data-ajax="false" class="ui-btn ui-shadow ui-corner-all ui-mini ui-btn-inline ui-icon-carat-l ui-btn-icon-left ui-alt-icon ui-nodisc-icon">Back</a>-->
+        </div><!-- /content -->
+        
+        <div data-role="panel" data-display="overlay" data-theme="b" id="nav-panel">
+            <ul data-role="listview">
+                <li><a data-role="button" data-icon="delete" data-iconpos="left" href="#" data-rel="close">Fechar menu</a></li>
+                <li><a class="ui-icon-user ui-btn ui-btn-icon-left" href="#panel-responsive-page2">Perfil</a></li>
+                <li><a class="ui-icon-shop ui-btn ui-btn-icon-left" data-transition="flow" href="#cadatraMov">Movimentações</a></li>
+                <li><a data-role="button" data-icon="lock" data-iconpos="left" href="#panel-responsive-page2">Contas</a></li>
+                <li><a data-role="button" data-icon="star" data-transition="flow" data-iconpos="left" href="#relatorioMetas">Relátorios</a></li>
+                <li><a data-role="button" data-icon="calendar" data-iconpos="left" href="#panel-responsive-page2">Metas</a></li>
+            </ul>
+        </div><!-- /panel -->
+        
+        <div data-role="panel" data-position="right" data-display="reveal" data-theme="a" id="add-form">
+            <form class="userform">
+                <h2>Login</h2>
+                <label for="name">Username:</label>
+                <input type="text" name="name" id="name" value="" data-clear-btn="true" data-mini="true">
+                <label for="password">Password:</label>
+                <input type="password" name="password" id="password" value="" data-clear-btn="true" autocomplete="off" data-mini="true">
+                <div class="ui-grid-a">
+                    <div class="ui-block-a"><a href="#" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-b ui-mini">Cancel</a></div>
+                    <div class="ui-block-b"><a href="#" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-mini">Save</a></div>
+                </div>
+            </form>
+        </div><!-- /panel -->
+        <div data-role="footer" data-position="fixed" data-theme="b">
+            <small align="center" class="ui-bar">Cuidamos do controle de suas movimentações.</small>
+        </div>
+     </div>
+        
+        <!-- Cadastro de Movimentações-->
+    <div data-role="page" id="cadatraMov" data-theme="b">
+        <div data-role="header">
+            <h1>Movimentos</h1>
+            <a href="#panel-responsive-page1" data-icon="back" data-transition>Principal</a>
+            <a href="#add-form" data-icon="gear" data-iconpos="notext">Add</a>
+            <div data-role="navbar" data-iconpos="left">
+                <ul>
+                    <li><a href="a.html" data-icon="plus" class="ui-btn-active"><font color= "00ff00">Receita</font></a></li>
+                    <li><a href="b.html" data-icon="minus"><font color= "ff0000">Despesa</font></a></li>
+                    <li><a href="b.html" data-icon="heart"><font color= "993366">Tranferência</font></a></li>
+                </ul>
+            </div><!-- /navbar -->
+        </div>
+        <div data-role="footer" data-position="fixed" data-theme="b">
+            <small align="center" class="ui-bar">Cuidamos do controle de suas movimentações.</small>
+        </div>
+    </div>
+        <!-- Relatorio de Metas-->
+    <div data-role="page" id="relatorioMetas">
+        <div data-role="header" data-theme="b">
+            <h1>Metas</h1>
+            <a href="#panel-responsive-page1" data-icon="back" data-transition>Principal</a>
+            <a href="#add-form" data-icon="gear" data-iconpos="notext">Add</a>
+        </div>
+        <div role="main" class="ui-content jqm-content jqm-fullwidth">
+            <div class="ui-body ui-body-a ui-corner-all">
+               <div id="barchart_material" style="overflow: auto" style="width: 900px; height: 500px;"></div>
+            </div>
+        </div>
+        <div data-role="footer" data-position="fixed" data-theme="b">
+            <small align="center" class="ui-bar">Cuidamos do controle de suas movimentações.</small>
+        </div>
+    </div>
+    </body>
+    
+    
+    
+    
+    <!-- Script Grafico -->
+    <script type="text/javascript">
+          google.charts.load('current', {'packages':['corechart']});
+          google.charts.setOnLoadCallback(drawChart);
+          function drawChart() {
+
+            var data = google.visualization.arrayToDataTable([
+              ['Task', 'Hours per Day'],
+              ['Trabalho',     11],
+              ['Alimentação',      5],
+              ['Lazer',  4],
+              ['Roupas', 3],
+              ['Família',    5],
+              ['Viagens',    7],
+              ['Presentes',    8]
+            ]);
+
+            var options = {
+              title: 'Demonstrativo do Mês',
+                is3D : true,
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+            chart.draw(data, options);
+          }
+    </script>
+</html>
